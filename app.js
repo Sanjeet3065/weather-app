@@ -5,3 +5,24 @@ document.getElementById('search-btn').addEventListener('click',
      // Additional code to fetch weather data will be added later
     });
     
+    async function fetchWeatherData(city) {
+        const apiKey = 'YOUR_API_KEY';
+        const apiUrl
+       =`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${
+       apiKey}`;
+        try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        console.log('Weather data:', data);
+        // Additional code to update DOM with weather information
+        } catch (error) {
+        console.error('Error fetching weather data:', error);
+        }
+       }
+
+       document.getElementById('search-btn').addEventListener('click',
+        function() {
+         const city = document.getElementById('city-input').value;
+         fetchWeatherData(city);
+        });
+       
