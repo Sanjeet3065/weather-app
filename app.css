@@ -45,12 +45,12 @@
             }
            }
 
-           #temperature {
-            border-radius: 8px;
-            border: solid 2px;
-            font-size: 36px;
-            color: #d2601e;
-            margin-bottom: 10px; } 
+         #temperature {
+         border-radius: 8px;
+         border: solid 2px;
+         font-size: 36px;
+         color: #d2601e;
+         margin-bottom: 10px; } 
 
            
          #weather-description {
