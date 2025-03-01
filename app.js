@@ -1,28 +1,31 @@
-document.getElementById('search-btn').addEventListener('click',
-    function() {
-     const city = document.getElementById('city-input').value;
-     console.log('City entered:', city);
-     // Additional code to fetch weather data will be added later
-    });
-    
-    async function fetchWeatherData(city) {
-        const apiKey = 'YOUR_API_KEY';
-        const apiUrl
-       =`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${
-       apiKey}`;
-        try {
-        const response = await fetch(apiUrl);
-        const data = await response.json();
-        console.log('Weather data:', data);
-        // Additional code to update DOM with weather information
-        } catch (error) {
-        console.error('Error fetching weather data:', error);
-        }
-       }
 
-       document.getElementById('search-btn').addEventListener('click',
+document.getElementById('search-btn').addEventListener('click',
         function() {
          const city = document.getElementById('city-input').value;
-         fetchWeatherData(city);
-        });
-       
+         console.log('City entered:', city);//fetch code will bw added later
+    fetchWeatherData(city);
+});
+
+async function fetchWeatherData(city) {
+    const apiKey = 'ad9977ec59bfbd6fd46eecd38378e741';
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+
+fetch(apiUrl)
+    .then(response => response.json())
+    .then(data => {
+        console.log("API Response:", data); // Confirm API Response
+
+        document.getElementById("city-name").innerHTML = `City Name: ${data.name}, ${data.sys.country}`;
+        document.getElementById("temperature").innerHTML = `Temperature: ${data.main.temp}°C`;
+        document.getElementById("weather-description").innerHTML = `Weather: ${data.weather[0].description}`;
+    })
+    .catch(error => {
+        console.error("Error fetching weather data:", error);
+        document.getElementById("weather-info").innerHTML = `<p style="color:red;">Error loading weather data</p>`;
+    });
+
+ }
+
+
+
