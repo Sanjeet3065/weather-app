@@ -31,7 +31,7 @@
         margin:5px;
     }
 
-        @media (max-width: 600px) {
+        @media (max-width: 800px) {
             .container {
             width: 100%;
             margin: 20px;
@@ -77,3 +77,20 @@
          border-radius: 8px;
          padding: 20px;
          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
+
+         .day-card {
+
+            background-color: #08e5f5;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 2px solid;
+           }
+           #day-forecast{
+            display: flex;
+            justify-content: space-between;
+            gap:10px;
+            padding: 10px;
+           }
+          
