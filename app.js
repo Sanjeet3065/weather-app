@@ -70,6 +70,41 @@ fetch(apiUrl)
     }
   }
  
+  document.getElementById('latlon-btn').addEventListener('click', function () {
+    const lat = document.getElementById('lat-input').value;
+    const lon = document.getElementById('lon-input').value;
+
+    if (!lat || !lon) {
+        alert("Please enter both latitude and longitude");
+        return;
+    }
+
+    fetchWeatherByCoordinates(lat, lon);
+});
+
+async function fetchWeatherByCoordinates(lat, lon) {
+    const apiKey = 'ad9977ec59bfbd6fd46eecd38378e741';
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+
+    try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+
+        // Update UI with weather info
+        document.getElementById("city-name").innerHTML =`City Name: ${data.name}, ${data.sys.country}`;
+        document.getElementById("temperature").innerHTML = `Temperature: ${data.main.temp}°C`;
+        document.getElementById("weather-description").innerHTML = `Weather: ${data.weather[0].description}`;
+
+        // Auto-fill city input box
+        document.getElementById('city-input').value = data.name;
+
+        // Optional: fetch forecast using auto-filled city
+        fetch3DayForecast(data.name);
+
+    } catch (error) {
+        console.error("Error fetching data by coordinates:", error);
+    }
+}
 
  
 
