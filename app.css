@@ -48,6 +48,7 @@
          #temperature {
          border-radius: 8px;
          border: solid 2px;
+         background-color:rgb(105, 184, 227);
          font-size: 36px;
          color: #d2601e;
          margin-bottom: 10px; } 
@@ -56,6 +57,7 @@
          #weather-description {
         box-shadow: #d25c17;
          border: solid 2px;
+         background-color:rgb(105, 184, 227);
          border-radius: 8px;
          font-size: 18px;
          color: #5f4c4c;
@@ -64,6 +66,7 @@
                
          #city-name {
           border: solid 2px;
+          background-color:rgb(105, 184, 227);
           border-radius: 8px;
           font-size: 24px;
           font-weight: bold;
@@ -73,6 +76,7 @@
         .weather-info {
         
          border: solid 2px;
+         background-color:rgb(105, 184, 227);
          background-color: #e6ece5;
          border-radius: 8px;
          padding: 20px;
@@ -93,4 +97,14 @@
             gap:10px;
             padding: 10px;
            }
-          
+
+           .day-card {
+            background-color: #8a9edb;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-color: #d25c17;
+           }
+
+           
