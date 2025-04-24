@@ -9,6 +9,19 @@ document.getElementById('search-btn').addEventListener('click',
 // console.log(forecastData);
 });
 
+document.getElementById('latlon-btn').addEventListener('click', function () {
+    const lat = document.getElementById('lat-input').value.trim();
+    const lon = document.getElementById('lon-input').value.trim();
+  
+    if (!lat || !lon || isNaN(lat) || isNaN(lon)) {
+      alert("Please enter valid latitude and longitude.");
+      return;
+    }
+  
+    fetchLatLonWeather(lat, lon);
+    fetch3DayForecastByCoords(lat, lon);
+  });
+
 async function fetchWeatherData(city) {
     const apiKey = 'ad9977ec59bfbd6fd46eecd38378e741';
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
@@ -19,6 +32,11 @@ fetch(apiUrl)
     .then(data => {
         console.log("API Response:", data); // Confirm API Response
 
+       // Error handling for invalid city name
+       if (data.cod && data.cod === "404") {
+        alert("City not found. Please enter a valid city name.");
+        return;
+    }
         document.getElementById("city-name").innerHTML = `City Name: ${data.name}, ${data.sys.country}`;
         document.getElementById("temperature").innerHTML = `Temperature: ${data.main.temp}°C`;
         document.getElementById("weather-description").innerHTML = `Weather: ${data.weather[0].description}`;
@@ -107,6 +125,35 @@ async function fetchWeatherByCoordinates(lat, lon) {
 }
 
  
+function fetchLatLonWeather(lat, lon) {
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+    
+    fetch(url)
+      .then(response => {
+        if (!response.ok) throw new Error("Invalid coordinates");
+        return response.json();
+      })
+      .then(data => {
+        document.getElementById("city-input").value = data.name;
+        updateWeatherUI(data);
+      })
+      .catch(error => {
+        alert("Error fetching weather from coordinates.");
+        console.error(error);
+      });
+  }
+  
+  async function fetch3DayForecastByCoords(lat, lon) {
+    const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
+    
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      displayForecast(data);
+    } catch (error) {
+      console.error("3-day forecast error (coords):", error);
+    }
+  }
 
 
  
