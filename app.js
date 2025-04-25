@@ -167,4 +167,36 @@ document.getElementById('toggle-temp-btn').addEventListener('click', () => {
     fetch3DayForecast(city); // reload forecast with new temp unit
   }
 });
- 
+
+function loadFavorites() {
+  const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+  const list = document.getElementById('favorites-list');
+  list.innerHTML = '';
+
+  favorites.forEach(city => {
+      const li = document.createElement('li');
+      li.textContent = city;
+      li.addEventListener('click', () => {
+          document.getElementById('city-input').value = city;
+          fetchWeatherData(city);
+          fetch3DayForecast(city);
+      });
+      list.appendChild(li);
+  });
+}
+document.getElementById('add-favorite-btn').addEventListener('click', () => {
+  const city = document.getElementById('city-input').value.trim();
+  if (!city) return alert("Enter a city name first!");
+
+  let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+  if (!favorites.includes(city)) {
+      favorites.push(city);
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+      loadFavorites();
+      alert(`${city} added to favorites.`);
+  } else {
+      alert(`${city} is already in favorites.`);
+  }
+});
+ loadFavorites();
