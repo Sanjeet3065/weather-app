@@ -1,4 +1,5 @@
 let isCelsius = true;
+localStorage.removeItem('favorites');
 document.getElementById('search-btn').addEventListener('click',
         function() {
          const city = document.getElementById('city-input').value;
