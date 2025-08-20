@@ -1,2 +1,2 @@
-# weather-app
-sanjeet
+# Weather-Application
+Sanjeet
